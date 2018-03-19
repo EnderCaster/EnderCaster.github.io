@@ -13,4 +13,9 @@ header=$header"date: "$(date +"%Y-%m-%d %H:%M:%S %:z")"\n"
 header=$header"categories: \n- CS\n"
 header=$header"tags: \n- \"Computer Science\"\n"
 header=$header"---"
-echo -e $header > "_posts/"$filename".markdown"
+if [[ $1 ]]
+then
+	echo -e $header > "_posts/"$filename".markdown"
+else
+	echo -e $header""
+fi 
