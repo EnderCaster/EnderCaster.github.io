@@ -85,13 +85,19 @@
 按照TLP官网教程安装过程很顺利</p>
 
 <figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nb">sudo </span>apt-get update <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt-get <span class="nb">install </span>acpi-call-dkms
-<span class="c"># 好，没有报错，那现在来检查一下有没有效果</span>
+<span class="c"># 好，没有报错，那现在来检查一下有没有效果
+</span>
 <span class="nb">sudo </span>tlp-stat
-<span class="c"># 结果还是inactive，显示没有安装，我想，那是不是dkms要手动安装啊？Google上没找到，然后我想到了软件自带的帮助</span>
-<span class="nb">sudo </span>dpkg <span class="nt">-l</span> | <span class="nb">grep </span>dkms <span class="c"># 确认一下有这个软件包</span>
-<span class="nb">sudo </span>dkms <span class="nb">install</span> <span class="c"># 猜测是这么用</span>
-<span class="c">#然后会提示这么用不对，使用 help 命令查询使用方式</span>
-<span class="nb">sudo </span>dkms <span class="nb">help</span> <span class="c">#诶！这个autoinstall好像可以</span>
+<span class="c"># 结果还是inactive，显示没有安装，我想，那是不是dkms要手动安装啊？Google上没找到，然后我想到了软件自带的帮助
+</span>
+<span class="nb">sudo </span>dpkg <span class="nt">-l</span> | <span class="nb">grep </span>dkms <span class="c"># 确认一下有这个软件包
+</span>
+<span class="nb">sudo </span>dkms <span class="nb">install</span> <span class="c"># 猜测是这么用
+</span>
+<span class="c">#然后会提示这么用不对，使用 help 命令查询使用方式
+</span>
+<span class="nb">sudo </span>dkms <span class="nb">help</span> <span class="c">#诶！这个autoinstall好像可以
+</span>
 Usage: /usr/sbin/dkms <span class="o">[</span>action] <span class="o">[</span>options]
   <span class="o">[</span>action]  <span class="o">=</span> <span class="o">{</span> add | remove | build | <span class="nb">install</span> | uninstall | match | autoinstall
                | mkdriverdisk | mktarball | ldtarball | mkrpm | mkkmp | mkdeb | mkbmdeb | status <span class="o">}</span>
