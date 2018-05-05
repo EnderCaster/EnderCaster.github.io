@@ -1,4 +1,123 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.0">Jekyll</generator><link href="https://endercaster.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://endercaster.github.io/" rel="alternate" type="text/html" /><updated>2018-03-31T22:34:17+08:00</updated><id>https://endercaster.github.io/</id><title type="html">Inspire Your Design</title><subtitle>Find things fun</subtitle><entry><title type="html">[手工]庆祝bilibili上市，做个纸模</title><link href="https://endercaster.github.io/diy/papermodel/2018/03/31/paper-model-bilibili-television.html" rel="alternate" type="text/html" title="[手工]庆祝bilibili上市，做个纸模" /><published>2018-03-31T14:39:19+08:00</published><updated>2018-03-31T14:39:19+08:00</updated><id>https://endercaster.github.io/diy/papermodel/2018/03/31/paper-model-bilibili-television</id><content type="html" xml:base="https://endercaster.github.io/diy/papermodel/2018/03/31/paper-model-bilibili-television.html">&lt;h1 id=&quot;bilibili这个一直赔钱的公司居然上市了&quot;&gt;bilibili这个一直赔钱的公司居然上市了&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.0">Jekyll</generator><link href="https://endercaster.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://endercaster.github.io/" rel="alternate" type="text/html" /><updated>2018-05-05T11:08:19+08:00</updated><id>https://endercaster.github.io/</id><title type="html">Inspire Your Design</title><subtitle>Find things fun</subtitle><entry><title type="html">[Docker]快速建站</title><link href="https://endercaster.github.io/cs/docker/nginx/2018/05/05/build-sites-with-docker-and-nginx.html" rel="alternate" type="text/html" title="[Docker]快速建站" /><published>2018-05-05T09:26:46+08:00</published><updated>2018-05-05T09:26:46+08:00</updated><id>https://endercaster.github.io/cs/docker/nginx/2018/05/05/build-sites-with-docker-and-nginx</id><content type="html" xml:base="https://endercaster.github.io/cs/docker/nginx/2018/05/05/build-sites-with-docker-and-nginx.html">&lt;h1 id=&quot;前言&quot;&gt;前言&lt;/h1&gt;
+&lt;p&gt;一直以来说是要创建一个自己的站点，但是在过程中一直实验失败，比如使用官方教程会和已有的程序冲突（特别是监听端口，由于是网页程序，端口号往往是80），直到我发现了docker。&lt;/p&gt;
+
+&lt;h1 id=&quot;过程&quot;&gt;过程&lt;/h1&gt;
+&lt;h2 id=&quot;安装nginx&quot;&gt;安装nginx&lt;/h2&gt;
+&lt;p&gt;Nginx是一款轻小型的网站、反向代理服务器软件，作用在下面会提到。&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;nginx
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;安装mysql&quot;&gt;安装MySQL&lt;/h2&gt;
+&lt;p&gt;MySQL用于存储WordPress的数据，其实也可以用docker进行安装，但是这里本机已经安装过了，就直接使用本机的。&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;mysql-server
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;安装docker&quot;&gt;安装Docker&lt;/h2&gt;
+&lt;p&gt;我的笔记本系统，在开发机离算是比较小众的一个系统，所以不是很适用&lt;a href=&quot;https://docs.docker.com/install/&quot;&gt;官方参考文档&lt;/a&gt;的安装方法,因此在系统论坛上找到了&lt;a href=&quot;https://wiki.deepin.org/index.php?title=Docker&quot;&gt;安装说明&lt;/a&gt;，具体操作步骤如下：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 安装软件源管理工具&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;apt-transport-https ca-certificates curl python-software-properties software-properties-common
+&lt;span class=&quot;c&quot;&gt;# 添加软件包安装密钥&lt;/span&gt;
+curl &lt;span class=&quot;nt&quot;&gt;-fsSL&lt;/span&gt; https://download.docker.com/linux/debian/gpg | &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-key add -
+&lt;span class=&quot;c&quot;&gt;# 确认密钥（可省略）&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-key fingerprint 0EBFCD88
+&lt;span class=&quot;c&quot;&gt;# 添加软件源&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 说明：wheezy是系统发行版代号，由于deepin是基于debian的发行版，所以使用debian对应版本的代号（通过cat /etc/debian_version查看数字编号，并查找对应的文本代号），如，笔者的版本代号为8.0,对应的就是jessie，将wheezy替换为jessie即可&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;add-apt-repository  &lt;span class=&quot;s2&quot;&gt;&quot;deb [arch=amd64] https://download.docker.com/linux/debian wheezy stable&quot;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 更新列表，并安装&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get update &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; docker-ce
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;安装openproject&quot;&gt;安装OpenProject&lt;/h2&gt;
+&lt;p&gt;OpenProject是一款项目管理应用，由于笔者挖的坑实在太多，又很懒，不使用项目管理工具来辅助的话，可能这辈子都填不完了。&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+docker run &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 10080:80 &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; openproject &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;SECRET_KEY_BASE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;secret &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; /opt/openproject/pgdata:/var/lib/postgresql/9.6/main &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; /opt/openproject/logs:/var/log/supervisor &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; /opt/openproject/static:/var/db/openproject &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  openproject/community
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;说明：&lt;br /&gt;
+-v是挂载卷，格式为宿主机的路径:docker容器的路径&lt;br /&gt;
+-p是端口映射，格式同样为宿主机端口:docker容器端口&lt;/p&gt;
+&lt;h2 id=&quot;安装gitlab&quot;&gt;安装GitLab&lt;/h2&gt;
+&lt;p&gt;GitLab是一款git管理应用，使用过GitHub的对这个应该不会陌生，基本原理是一样的；因为有些项目并不想开源，所以要安装这个。&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+docker run &lt;span class=&quot;nt&quot;&gt;--detach&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;--hostname&lt;/span&gt; gitlab.endercaster.lan &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;--publish&lt;/span&gt; 11443:443 &lt;span class=&quot;nt&quot;&gt;--publish&lt;/span&gt; 11080:80 &lt;span class=&quot;nt&quot;&gt;--publish&lt;/span&gt; 11022:22 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; gitlab &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;--restart&lt;/span&gt; always &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;--volume&lt;/span&gt; /opt/gitlab/config:/etc/gitlab &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;--volume&lt;/span&gt; /opt/gitlab/logs:/var/log/gitlab &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;--volume&lt;/span&gt; /opt/gitlab/data:/var/opt/gitlab &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    gitlab/gitlab-ce
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;说明：&lt;br /&gt;
+–volume=-v&lt;br /&gt;
+–publish=-p&lt;br /&gt;
+hostname是通过host改出来的局域网域名，这里可以改进，在本机再开一个DNS&lt;/p&gt;
+&lt;h2 id=&quot;安装wordpress&quot;&gt;安装WordPress&lt;/h2&gt;
+&lt;p&gt;WordPress我觉得就不用多说了，著名的五分钟建站博客。&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+docker run &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 12080:80 &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; wordpress &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;SECRET_KEY_BASE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;secret &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; /opt/wordpress/html:/var/www/html &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  wordpress
+
+&lt;span class=&quot;c&quot;&gt;# 设置ServerName&lt;/span&gt;
+docker &lt;span class=&quot;nb&quot;&gt;exec&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-it&lt;/span&gt; wordpress bash
+&lt;span class=&quot;nb&quot;&gt;sed&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'s/#ServerName www.example.com/ServerName 你访问wordpress使用的域名/g'&lt;/span&gt; /etc/apache2/sites-enabled/000-default.conf 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h3 id=&quot;配置mysql&quot;&gt;配置MySQL&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 登入mysql&lt;/span&gt;
+mysql &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; root &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;-- 创建wordpress使用的数据库&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;database&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wordpress&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;-- 创建wordpress使用的账户,并授权&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;-- MySQL5.7&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;grant&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;all&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;on&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wordpress&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wordpress&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'%'&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;identified&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'wordpress'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;-- MySQL8.0更改了认证方式，新的认证方式WordPress不识别，所以此处使用原来的插件mysql_native_password认证&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wordpress&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'%'&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;identified&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mysql_native_password&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'wordpress'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;grant&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;all&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;on&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wordpress&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wordpress&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;说明：
+不用建表？对，还真不用，详情请参阅&lt;a href=&quot;https://wordpress.com/&quot;&gt;WordPress官方网站&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;配置nginx反向代理&quot;&gt;配置nginx反向代理&lt;/h2&gt;
+&lt;p&gt;前面说了，装Nginx是有用的，在同一台机子上我们搭建了三个网站，只有端口不同，我们不想要通过端口号来访问服务，怎么办？这就是Nginx反向代理的作用。
+以WordPress为例&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 创建配置文件&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;touch&lt;/span&gt; /etc/nginx/sites-available/wordpress
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /etc/nginx/sites-enabled
+&lt;span class=&quot;c&quot;&gt;# 建立链接&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;ln&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; ../sites-available/wordpress wordpress
+&lt;span class=&quot;c&quot;&gt;# 编辑配置文件&lt;/span&gt;
+vi wordpress
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;说明：&lt;br /&gt;
+这里的wordpress是文件名，虽然不一定要和应用对应，但我还是建议这么做&lt;br /&gt;
+那么问题来了，配置文件里写什么呢？&lt;/p&gt;
+&lt;div class=&quot;language-nginx highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;listen&lt;/span&gt;       &lt;span class=&quot;mi&quot;&gt;80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# 访问使用的域名
+&lt;/span&gt;    &lt;span class=&quot;kn&quot;&gt;server_name&lt;/span&gt;  &lt;span class=&quot;s&quot;&gt;wordpress.endercaster.lan&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;#这就是实际地址，此处做的实际上是一个端口转发
+&lt;/span&gt;        &lt;span class=&quot;kn&quot;&gt;proxy_pass&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;http://127.0.0.1:12080&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;kn&quot;&gt;proxy_redirect&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;off&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+        &lt;span class=&quot;c1&quot;&gt;# 具体哪一行我不知道，但是这里不设置的话会导致访问WordPress时CSS和js加载不出来
+&lt;/span&gt;        &lt;span class=&quot;kn&quot;&gt;proxy_set_header&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Host&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$http_host&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;kn&quot;&gt;proxy_set_header&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;X-Real-IP&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$remote_addr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;kn&quot;&gt;proxy_set_header&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;X-Forwarded-Proto&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$scheme&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;结语&quot;&gt;结语&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;Docker在节约时间上真是太好用了&lt;/li&gt;
+  &lt;li&gt;Nginx的反向代理配置起来比Apache方便很多&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="Computer Science" /><category term="docker" /><category term="reverse proxy" /><summary type="html">前言 一直以来说是要创建一个自己的站点，但是在过程中一直实验失败，比如使用官方教程会和已有的程序冲突（特别是监听端口，由于是网页程序，端口号往往是80），直到我发现了docker。</summary></entry><entry><title type="html">[手工]庆祝bilibili上市，做个纸模</title><link href="https://endercaster.github.io/diy/papermodel/2018/03/31/paper-model-bilibili-television.html" rel="alternate" type="text/html" title="[手工]庆祝bilibili上市，做个纸模" /><published>2018-03-31T14:39:19+08:00</published><updated>2018-03-31T14:39:19+08:00</updated><id>https://endercaster.github.io/diy/papermodel/2018/03/31/paper-model-bilibili-television</id><content type="html" xml:base="https://endercaster.github.io/diy/papermodel/2018/03/31/paper-model-bilibili-television.html">&lt;h1 id=&quot;bilibili这个一直赔钱的公司居然上市了&quot;&gt;bilibili这个一直赔钱的公司居然上市了&lt;/h1&gt;
 &lt;p&gt;作为原始投资人(自称)，当然要支持一发啊,话不多说，下面是图纸，一张A4能出2个小电视，怎么想都是赚的。&lt;br /&gt;
 &lt;img src=&quot;https://EnderCaster.github.io/images/paper-model-1-bilibili.jpg&quot; alt=&quot;papermodel&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><category term="paper model" /><category term="hand make" /><category term="diy" /><summary type="html">bilibili这个一直赔钱的公司居然上市了 作为原始投资人(自称)，当然要支持一发啊,话不多说，下面是图纸，一张A4能出2个小电视，怎么想都是赚的。</summary></entry><entry><title type="html">[第二章]Windows Power Shell实战指南阅读笔记</title><link href="https://endercaster.github.io/cs/note/powershell/2018/03/19/power-shell-learning-note-2.html" rel="alternate" type="text/html" title="[第二章]Windows Power Shell实战指南阅读笔记" /><published>2018-03-19T19:55:49+08:00</published><updated>2018-03-19T19:55:49+08:00</updated><id>https://endercaster.github.io/cs/note/powershell/2018/03/19/power-shell-learning-note-2</id><content type="html" xml:base="https://endercaster.github.io/cs/note/powershell/2018/03/19/power-shell-learning-note-2.html">&lt;h1 id=&quot;摘要&quot;&gt;摘要&lt;/h1&gt;
 &lt;p&gt;本章主要介绍工具和相关显示设置&lt;/p&gt;
