@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="cn">
+  
+  <head>
+  <meta charset="UTF-8">
+  <title>Inspire Your Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#157878">
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/cayman.css">
+</head>
+
+  <body>
+    <section class="page-header">
+  <h1 class="project-name">Inspire Your Design</h1>
+  <h2 class="project-tagline">You will find inspiration here, not only for programer</h2>
+  <a href="https://github.com/EnderCaster/EnderCaster.github.io" class="btn">View on GitHub</a>
+  <a href="https://github.com/EnderCaster/EnderCaster.github.io/zipball/master" class="btn">Download .zip</a>
+  <a href="https://github.com/EnderCaster/EnderCaster.github.io/tarball/master" class="btn">Download .tar.gz</a>
+</section>
+
+    <section class="main-content">
+      
+      <h2>Graphviz dot画图学习</h2>
+<p class="meta">03 Jun 2018</p>
+
+<p>Dot是开源工具包Graphviz上用来画图的一门脚本语言。通过布局引擎解析脚本得到图像，然后可以将图像导出为各种格式以满足需求，有了它，我们就可以很方便地通过编写脚本来画各种结构示意图和流程图。
+常用关键字：</p>
+<ul>
+  <li>graph：定义当前图属性</li>
+  <li>node：定义各结点属性，如fontname</li>
+  <li>subgraph：定义子图，需要以cluster开头，否则引擎不识别
+    <div class="language-dot highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">digraph</span> <span class="nv">service_map</span> <span class="p">{</span>
+  <span class="k">graph</span> <span class="o">[</span><span class="n">dpi</span><span class="p">=</span><span class="s2">"300"</span><span class="o">]</span><span class="p">;</span>
+  <span class="k">node</span> <span class="o">[</span><span class="n">color</span><span class="p">=</span><span class="s2">"gray"</span><span class="p">;</span><span class="n">shape</span><span class="p">=</span><span class="s2">"record"</span><span class="p">;</span><span class="n">fontname</span><span class="p">=</span><span class="s2">"Microsoft YaHei"</span><span class="o">]</span><span class="p">;</span>
+    
+  <span class="n">label</span><span class="p">=</span><span class="s2">"Service Map"</span><span class="p">;</span>
+  <span class="nv">Request</span><span class="p">;</span>
+  <span class="nv">github_pages</span> <span class="o">[</span><span class="n">label</span><span class="p">=</span><span class="s2">"GitHub Pages"</span><span class="o">]</span><span class="p">;</span>
+  <span class="k">subgraph</span> <span class="nv">cluster_web</span><span class="p">{</span>
+      <span class="n">label</span><span class="p">=</span><span class="s2">"Web front end server"</span><span class="p">;</span>
+      <span class="nv">nginx</span> <span class="o">[</span><span class="n">label</span><span class="p">=</span><span class="s2">"Reverse Proxy Server"</span><span class="o">]</span><span class="p">;</span>
+      <span class="nv">docker</span> <span class="o">[</span><span class="n">label</span><span class="p">=</span><span class="s2">"Docker Container Manager"</span><span class="o">]</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">subgraph</span> <span class="nv">cluster_docker</span><span class="p">{</span>
+      <span class="n">label</span><span class="p">=</span><span class="s2">"Docker Container Manager"</span><span class="p">;</span>
+      <span class="nv">openproject</span> <span class="o">[</span><span class="n">label</span><span class="p">=</span><span class="s2">"OpenProject"</span><span class="o">]</span><span class="p">;</span>
+      <span class="nv">gitlab</span> <span class="o">[</span><span class="n">label</span><span class="p">=</span><span class="s2">"GitLab"</span><span class="o">]</span><span class="p">;</span>
+      <span class="nv">wordpress</span> <span class="o">[</span><span class="n">label</span><span class="p">=</span><span class="s2">"WordPress"</span><span class="o">]</span><span class="p">;</span>
+      <span class="nv">mysql</span> <span class="o">[</span><span class="n">label</span><span class="p">=</span><span class="s2">"Common Mysql Database"</span><span class="o">]</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">subgraph</span> <span class="nv">cluster_filesystem</span><span class="p">{</span>
+      <span class="n">label</span><span class="p">=</span><span class="s2">"Mount at where"</span><span class="p">;</span>
+      <span class="nv">openproject_mnt</span> <span class="o">[</span><span class="n">label</span><span class="p">=</span><span class="s2">"/opt/openproject/data:/var/lib/postgresql/9.6/main\l\n/opt/openproject/logs:/var/log/supervisor\l\n/opt/openproject/static:/var/db/openproject\l"</span><span class="o">]</span><span class="p">;</span>
+      <span class="nv">gitlab_mnt</span> <span class="o">[</span><span class="n">label</span><span class="p">=</span><span class="s2">"/opt/gitlab/config:/etc/gitlab\l\n/opt/gitlab/logs:/var/log/gitlab\l\n/opt/gitlab/data:/var/opt/gitlab\l"</span><span class="o">]</span><span class="p">;</span>
+      <span class="nv">wordpress_mnt</span> <span class="o">[</span><span class="n">label</span><span class="p">=</span><span class="s2">"/opt/wordpress/www:/var/www/html"</span><span class="o">]</span><span class="p">;</span>
+      <span class="nv">mysql_mnt</span> <span class="o">[</span><span class="n">label</span><span class="p">=</span><span class="s2">"/opt/mysql/data:/var/lib/mysql"</span><span class="o">]</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nv">Request</span><span class="o">-&gt;</span><span class="nv">nginx</span><span class="p">;</span>
+  <span class="nv">nginx</span><span class="o">-&gt;</span><span class="nv">docker</span><span class="p">;</span>
+  <span class="nv">nginx</span><span class="o">-&gt;</span><span class="nv">github_pages</span><span class="p">;</span>
+  <span class="nv">docker</span><span class="o">-&gt;</span><span class="nv">wordpress</span> <span class="o">[</span><span class="n">label</span><span class="p">=</span><span class="s2">"hostname=wordpress.endercaster.com"</span><span class="o">]</span><span class="p">;</span>
+  <span class="nv">docker</span><span class="o">-&gt;</span><span class="nv">openproject</span> <span class="o">[</span><span class="n">label</span><span class="p">=</span><span class="s2">"hostname=openproject.endercaster.com"</span><span class="o">]</span><span class="p">;</span>
+  <span class="nv">docker</span><span class="o">-&gt;</span><span class="nv">gitlab</span> <span class="o">[</span><span class="n">label</span><span class="p">=</span><span class="s2">"hostname=gitlab.endercaster.com"</span><span class="o">]</span><span class="p">;</span>
+  <span class="nv">wordpress</span><span class="o">-&gt;</span><span class="nv">mysql</span><span class="p">;</span>
+  <span class="nv">wordpress</span><span class="o">-&gt;</span><span class="nv">wordpress_mnt</span> <span class="o">[</span><span class="n">label</span><span class="p">=</span><span class="s2">"mount"</span><span class="o">]</span><span class="p">;</span>
+  <span class="nv">openproject</span><span class="o">-&gt;</span><span class="nv">openproject_mnt</span> <span class="o">[</span><span class="n">label</span><span class="p">=</span><span class="s2">"mount"</span><span class="o">]</span><span class="p">;</span>
+  <span class="nv">gitlab</span><span class="o">-&gt;</span><span class="nv">gitlab_mnt</span> <span class="o">[</span><span class="n">label</span><span class="p">=</span><span class="s2">"mount"</span><span class="o">]</span><span class="p">;</span>
+  <span class="nv">mysql</span><span class="o">-&gt;</span><span class="nv">mysql_mnt</span> <span class="o">[</span><span class="n">label</span><span class="p">=</span><span class="s2">"mount"</span><span class="o">]</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>上述代码生成如下图片
+<img src="http://localhost:4000/images/service_map.png" alt="site map" /></p>
+
+
+      <footer class="site-footer">
+  <span class="site-footer-owner"><a href="http://localhost:4000">Inspire Your Design</a> is maintained by <a href="https://github.com/EnderCaster">EnderCaster</a>.</span>
+  <span class="site-footer-credits">This page was NOT generated by <a href="https://pages.github.com">GitHub Pages</a>.</span>
+</footer>
+
+
+    </section>
+
+  </body>
+</html>
