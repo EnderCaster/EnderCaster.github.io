@@ -33,10 +33,10 @@
 <span class="nv">header</span><span class="o">=</span><span class="nv">$header</span><span class="s2">"layout: post</span><span class="se">\n</span><span class="s2">"</span>
 <span class="k">if</span> <span class="o">[[</span> <span class="nv">$1</span> <span class="o">]]</span>
 <span class="k">then
-</span><span class="nv">header</span><span class="o">=</span><span class="nv">$header</span><span class="s2">"title: </span><span class="se">\"</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="se">\"\n</span><span class="s2">"</span>
-<span class="nv">filename</span><span class="o">=</span><span class="nv">$filename</span><span class="s2">"-"</span><span class="k">${</span><span class="nv">1</span><span class="p">// /-</span><span class="k">}</span>
+	</span><span class="nv">header</span><span class="o">=</span><span class="nv">$header</span><span class="s2">"title: </span><span class="se">\"</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="se">\"\n</span><span class="s2">"</span>
+	<span class="nv">filename</span><span class="o">=</span><span class="nv">$filename</span><span class="s2">"-"</span><span class="k">${</span><span class="nv">1</span><span class="p">// /-</span><span class="k">}</span>
 <span class="k">else
-</span><span class="nv">header</span><span class="o">=</span><span class="nv">$header</span><span class="s2">"title:</span><span class="se">\n</span><span class="s2">"</span>
+	</span><span class="nv">header</span><span class="o">=</span><span class="nv">$header</span><span class="s2">"title:</span><span class="se">\n</span><span class="s2">"</span>
 <span class="k">fi
 </span><span class="nv">header</span><span class="o">=</span><span class="nv">$header</span><span class="s2">"date: "</span><span class="k">$(</span><span class="nb">date</span> +<span class="s2">"%Y-%m-%d %H:%M:%S %:z"</span><span class="k">)</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span>
 <span class="nv">header</span><span class="o">=</span><span class="nv">$header</span><span class="s2">"categories: </span><span class="se">\n</span><span class="s2">- CS</span><span class="se">\n</span><span class="s2">"</span>
