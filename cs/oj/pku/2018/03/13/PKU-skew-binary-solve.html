@@ -32,19 +32,31 @@
 输入包含一行或多行，每行包含一个整数n,若n=0，则输入结束，否则其为skew数，输出<strong>对应的十进制值</strong></p>
 </blockquote>
 
-<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="n">file</span><span class="p">;</span>
-<span class="k">while</span> <span class="p">(</span><span class="kt">char</span> <span class="n">line</span><span class="p">[]</span><span class="o">=</span><span class="n">f</span><span class="p">.</span><span class="n">readline</span><span class="p">()){}</span>
-    <span class="kt">int</span> <span class="n">result</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">bitCounter</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">line</span><span class="o">&gt;</span><span class="mi">10</span><span class="p">){</span>
-        <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">bit</span><span class="o">=</span><span class="n">line</span><span class="o">%</span><span class="mi">10</span><span class="p">;</span>
-        <span class="n">line</span><span class="o">/=</span><span class="mi">10</span><span class="p">;</span>
-        <span class="n">result</span><span class="o">=</span><span class="n">bit</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="p">(</span><span class="n">bitCounter</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">bitCounter</span><span class="o">++</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="n">cout</span><span class="o">&lt;&lt;</span> <span class="n">result</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="cp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;cmath&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">skewToInt</span><span class="p">(</span><span class="n">string</span><span class="p">);</span>
+<span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
+	<span class="n">string</span> <span class="n">skew</span><span class="p">;</span>
+	<span class="n">getline</span><span class="p">(</span><span class="n">cin</span><span class="p">,</span><span class="n">skew</span><span class="p">);</span>
+	<span class="k">while</span><span class="p">(</span><span class="n">skew</span><span class="p">.</span><span class="n">compare</span><span class="p">(</span><span class="s">"0"</span><span class="p">)</span><span class="o">!=</span><span class="mi">0</span><span class="p">){</span>
+		<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">skewToInt</span><span class="p">(</span><span class="n">skew</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+		<span class="n">getline</span><span class="p">(</span><span class="n">cin</span><span class="p">,</span><span class="n">skew</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="n">skewToInt</span><span class="p">(</span><span class="n">string</span> <span class="n">skewBinary</span><span class="p">){</span>
+	<span class="kt">int</span> <span class="n">skewLen</span><span class="o">=</span><span class="n">skewBinary</span><span class="p">.</span><span class="n">length</span><span class="p">();</span>
+	<span class="kt">char</span> <span class="n">bitC</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">bit</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">result</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">index</span><span class="o">&lt;</span><span class="n">skewLen</span><span class="p">;</span><span class="n">index</span><span class="o">++</span><span class="p">){</span>
+		<span class="n">bitC</span><span class="o">=</span><span class="n">skewBinary</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">index</span><span class="p">);</span>
+		<span class="n">bit</span><span class="o">=</span><span class="n">bitC</span><span class="o">-</span><span class="sc">'0'</span><span class="p">;</span>
+		<span class="n">result</span><span class="o">+=</span><span class="n">bit</span><span class="o">*</span><span class="p">(</span><span class="n">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">skewLen</span><span class="o">-</span><span class="n">index</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="n">result</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
 <h1 id="变体">变体</h1>
@@ -54,7 +66,8 @@
 输入包含一行或多行，每行包含一个十进制整数n,若n=0，则输入结束，否则输出<strong>对应的skew表示</strong></p>
 </blockquote>
 
-<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="n">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"Hello Github Pages"</span><span class="p">);</span>
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="c1">//这部分题是我出的，似乎不具有唯一解，放置
+</span>
 <span class="c1">// prints 'Github Pages' to STDOUT.</span></code></pre></figure>
 
 
